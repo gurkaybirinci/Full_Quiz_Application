@@ -7,15 +7,9 @@ import java.util.*;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.xmlbeans.impl.schema.SoapEncSchemaTypeSystem;
 
 public class Main {
-//    static boolean flagGiris = true;
-    static boolean flagAd = true;
-//    static boolean flagSifre = true;
+    static boolean flag = true;
     static int satirSayisi;
     static XSSFSheet sheet0;
     static XSSFSheet sheet1;
@@ -33,55 +27,37 @@ public class Main {
         satirSayisi = sheet1.getLastRowNum();
         System.out.println(satirSayisi);
 
-//        int hucreSayisi = sheet.get
+        // Kayıt Bilgileri bölümündeki (sheet1) varolan bir hücrenin değerini değiştirme
+//        Row row = sheet1.getRow(Satır No Gir);
+//        row.getCell(0).setCellValue("Yeni İsim Gir");
+//        row.getCell(1).setCellValue("Yeni Şifre Gir");
+//        row = sheet2.getRow(Yukardaki Satır No ile aynı noyu gir);
+//        row.getCell(0).setCellValue("Yeni İsim Gir");
 
-        // Bir hücrenin değerini değiştirme
-//        Row row = sheet1.getRow(0);
-//        row.getCell(0).setCellValue("Gürkay");
-//        row.getCell(1).setCellValue("123456");
-//        row.getCell(2).setCellValue("Şifre");
-//
-//        row = sheet.getRow(1);
-//        row.getCell(0).setCellValue("Gürkay");
-//        row.getCell(1).setCellValue("Birinci");
-//        row.getCell(2).setCellValue("123456");
-//
-//        row = sheet.getRow(2);
-//        row.getCell(0).setCellValue("Esra");
-//        row.getCell(1).setCellValue("Birinci");
-//        row.getCell(2).setCellValue("123456");
-//
-//        row = sheet.createRow(3);
-//        row.createCell(0).setCellValue("Abidik");
-//        row.createCell(1).setCellValue("Birinci");
-//        row.createCell(2).setCellValue("123456");
-//
-//        row = sheet.createRow(4);
-//        row.createCell(0).setCellValue("Kubidik");
-//        row.createCell(1).setCellValue("Birinci");
-//        row.createCell(2).setCellValue("123456");
-//
-//        row = sheet.createRow(5);
-//        row.createCell(0).setCellValue("Mobidik");
-//        row.createCell(1).setCellValue("Birinci");
-//        row.createCell(2).setCellValue("123456");
 
-        //Bütün satırları okuma
-//        satirSayisi = sheet1.getLastRowNum()+1;
-//        for (int i = 0; i < satirSayisi; i++) {
-//            for (int j = 0; j < 3; j++) {
-//                System.out.print(sheet.getRow(i).getCell(j) + ", ");
-//            }
-//        }
-//        boolean flagGiris = true;
-//        boolean flagAd = true;
-//        boolean flagSifre = true;
+        // Kayıt Bilgileri bölümünde (sheet1) yeni bir satır ve hücre ekleyerek veri girme
+//        row = sheet1.createRow(satirSayisi+1);
+//        row.createCell(0).setCellValue("İsim Gir");
+//        row.createCell(1).setCellValue("Şifre Gir");
+//        row = sheet2.createRow(satirSayisi+1);
+//        row.createCell(0).setCellValue("İsim Gir");
+
+
+        // Quiz Sayfasına (sheet0) yeni bir soru ve cevapları girme
+//        row = sheet0.createRow(satirSayisi+1);
+//        row.createCell(0).setCellValue("Soru Metnini Gir");
+//        row.createCell(1).setCellValue("a) Cevap1 Gir");
+//        row.createCell(1).setCellValue("b) Cevap2 Gir");
+//        row.createCell(1).setCellValue("c) Cevap3 Gir");
+//        row.createCell(1).setCellValue("d) Cevap4 Gir");
+//        row.createCell(1).setCellValue("Doğru Cevap Şıkkını Gir");
+
 
         Scanner input = new Scanner(System.in);
         System.out.println("\n...QUİZ UYGULAMASINA HOŞGELDİNİZ...\n");
 
         // Giriş ekranı: Sisteme giriş mi yapılacak yoksa kayıt mı olunacağı sorulur.
-        while (flagAd){
+        while (flag){
             System.out.print("Ne yapmak istersiniz?\n\tGiriş yapmak için --> 1'e\n\tKayıt olmak için --> 2'ye\nbasınız: ");
             String ilkEkran = input.next();
             if (ilkEkran.equals("1")) {
@@ -98,13 +74,15 @@ public class Main {
                 sheet1.getRow(satirSayisi+1).createCell(1).setCellValue(sifre);
                 break;
             }else {
-                System.out.println("Hatalı giriş yaptınız. Tehrar deneyiniz.");
+                System.out.println("Hatalı giriş yaptınız. Tekrar deneyiniz.");
             }
         }
-        flagAd = true;
+        flag = true;
         System.out.println(satirSayisi);
         System.out.println("\n______________________________\nSORULAR");
-        for (int i = 0; i < satirSayisi; i++) {
+
+        // Bütün satırları okuma
+        for (int i = 0; i < satirSayisi+1; i++) {
             for (int j = 0; j < 2; j++) {
                 System.out.print(sheet1.getRow(i).getCell(j) + ", ");
             }
@@ -114,34 +92,7 @@ public class Main {
 
 
 
-        // Kullanıcı Girişi: Ad-Şifre doğrulaması yapılır
 
-        int i = 0;
-//        while (flagAd){
-//            System.out.print("Adınızı giriniz: ");
-//            String ad = input.next();
-//            for (i = 0; i < satirSayisi; i++) {
-//                if (ad.equals(sheet.getRow(i).getCell(0).getStringCellValue())) {
-//                    flagAd = false;
-//                    break;
-//                }
-//            }
-//            if (flagAd){
-//                System.out.println("Bu isim yok. Tekrar deneyiniz.");
-//            }
-//        }
-//        while (flagSifre){
-//            System.out.print("Şifrenizi giriniz: ");
-//            String sifre = input.next();
-//            if (sifre.equals(sheet.getRow(i).getCell(2).getStringCellValue())) {
-//                System.out.println("Hoşgeldin " + sheet.getRow(i).getCell(0).getStringCellValue());
-//                flagSifre = false;
-//            } else {
-//                System.out.println("Hatalı şifre girdiniz. Tekrar deneyiniz.");
-//            }
-//        }
-//
-//        System.out.println("\n______________________________\nSORULAR");
 
 
 //        //Excel dosyasındaki bir hücrenin değerini okuma
@@ -165,34 +116,34 @@ public class Main {
 
 
     public static void kullaniciAdiSor(){
-        while (flagAd){
+        while (flag){
             System.out.print("Adınızı giriniz: ");
             String ad = input.next();
             for (i = 0; i < satirSayisi+1; i++) {
                 if (ad.equals(sheet1.getRow(i).getCell(0).getStringCellValue())) {
-                    flagAd = false;
+                    flag = false;
                     break;
                 }
             }
-            if (flagAd){
+            if (flag){
                 System.out.println("Bu isim yok. Tekrar deneyiniz.");
             }
         }
-        flagAd=true;
+        flag =true;
     }
 
     public static void sifreSor(){
-        while (flagAd){
+        while (flag){
             System.out.print("Şifrenizi giriniz: ");
             String sifre = input.next();
             if (sifre.equals(sheet1.getRow(i).getCell(1).getStringCellValue())) {
                 System.out.println("Hoşgeldin " + sheet1.getRow(i).getCell(0).getStringCellValue());
-                flagAd = false;
+                flag = false;
             } else {
                 System.out.println("Hatalı şifre girdiniz. Tekrar deneyiniz.");
             }
         }
-        flagAd = true;
+        flag = true;
     }
 
 }
